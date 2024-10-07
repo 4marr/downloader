@@ -1,0 +1,132 @@
+async function searchVideo() {
+    const downloadButton = document.querySelector('button');
+    downloadButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> &nbsp Searching...';
+
+    try {
+        function generateRandomString(length) {
+            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            let result = '';
+            for (let i = 0; i < length; i++) {
+                result += characters.charAt(Math.floor(Math.random() * characters.length));
+            }
+            return result;
+        }
+
+        const randomString = generateRandomString(8);
+        const url = document.getElementById('urlSosmed').value;
+        if (url.trim() === '') {
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "URL cannot be empty!"
+            });
+            return;
+        }
+        const youtubeRegex = /^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube(?:-nocookie)?\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|live\/|v\/)?)([\w\-]+)(\S+)?$/;
+        const supportedUrls = ['instagram.com', 'tiktok.com', 'youtube.com', 'youtu.be', 'facebook.com', 'fb.watch', 'reel', 'x.com', 'twitter.com'];
+
+        // if (!supportedUrls.some(supportedUrl => url.includes(supportedUrl)) && !youtubeRegex.test(url)) {
+        //     alert('Unsupported URL!, Hanya support fb/ig/tt/yt');
+        //     return;
+        // }
+
+        const ig = `https://api.ryzendesu.vip/api/downloader/igdl?url=${encodeURIComponent(url)}`;
+        const tt = `https://api.nyxs.pw/dl/tiktok?url=${encodeURIComponent(url)}`;
+        const yt = `https://api.nyxs.pw/dl/yt-direct?url=${encodeURIComponent(url)}`;
+        const twit = `https://api.ryzendesu.vip/api/downloader/twitter?url=${encodeURIComponent(url)}`
+        const fb = `https://api.ryzendesu.vip/api/downloader/fbdl?url=${encodeURIComponent(url)}`;
+        const searchYt = `https://itzpire.com/search/youtube?query=${encodeURIComponent(url)}`;
+
+        let response, data;
+        let downloadLinks = '';  // Initialize downloadLinks
+
+        if (url.includes('instagram.com')) {
+            response = await fetch(ig);
+            data = await response.json();
+            data.data.forEach((item, index) => {
+                downloadLinks += `
+                <img src="${item.thumbnail}" alt="thumbnail" id="thumbnail" />
+                <a href="${item.url}" class="bg-indigo-500 hover:bg-indigo-300 my-2 p-2 rounded text-white hover:text-black ease-in duration-200" download>Download File ${index + 1}</a>`;
+            });
+        } else if (url.includes('tiktok.com')) {
+            response = await fetch(tt);
+            data = await response.json();
+
+            if (data.result.type === 'image') {
+                data.result.images.forEach((imageUrl, index) => {
+                    downloadLinks += `
+                    <img src="${imageUrl}" alt="thumbnail" id="thumbnail" />
+                    <a href="${imageUrl}" class="bg-indigo-500 hover:bg-indigo-300 my-2 p-2 rounded text-white hover:text-black ease-in duration-200" download="${randomString}.jpg">Download Image ${index + 1}</a>`;
+                });
+                downloadLinks += `<a href="${data.result.audio}" target="_blank" class="bg-indigo-500 hover:bg-indigo-300 p-2 rounded text-white hover:text-black ease-in duration-200" download>Download Music Audio</a>`;
+            } else {
+                downloadLinks += `
+                    <p>${data.result.desc}</p>
+                    <a href="${data.result.video}" class="bg-indigo-500 hover:bg-indigo-300 mt-2 mb-2 p-2 rounded text-white hover:text-black ease-in duration-200" target="_blank" download>Download Video</a>
+                    <a href="${data.result.videoHD}" class="bg-indigo-500 hover:bg-indigo-300 mb-2 p-2 rounded text-white hover:text-black ease-in duration-200" target="_blank" download>Download Video HD</a>
+                    <a href="${data.result.videoWatermark}" class="bg-indigo-500 hover:bg-indigo-300 mb-2 p-2 rounded text-white hover:text-black ease-in duration-200" target="_blank" download>Download Video With Watermark</a>
+                    <a href="${data.result.music}" class="bg-indigo-500 hover:bg-indigo-300 mb-2 p-2 rounded text-white hover:text-black ease-in duration-200" target="_blank" download>Download Music Audio</a>
+                `;
+            }
+        } else if (youtubeRegex.test(url)) {
+            response = await fetch(yt);
+            data = await response.json();
+
+            downloadLinks += `
+            <img src="${data.result.thumbnail}" alt="thumbnail" id="thumbnail" />
+            <p>${data.result.title}</p>
+            <a href="${data.result.urlVideo}" class="bg-indigo-500 hover:bg-indigo-300 my-2 p-2 rounded text-white hover:text-black ease-in duration-200" target="_blank" download="${data.title}">Download Video</a>
+            <a href="${data.result.urlAudio}" class="bg-indigo-500 hover:bg-indigo-300 mb-2 p-2 rounded text-white hover:text-black ease-in duration-200" target="_blank" download>Download Music Audio</a>
+        `;
+        } else if (/(reel|fb|facebook\.com|fb\.watch)/i.test(url)) {
+            response = await fetch(fb);
+            data = await response.json();
+
+            downloadLinks += `<img src="${data.data[0].thumbnail} alt="thumbnail" />`
+            data.data.forEach((item) => {
+                downloadLinks += `<a href="${item.url}" class="bg-indigo-500 hover:bg-indigo-300 mt-2 my-1 rounded text-white hover:text-black ease-in duration-200" download>Download Video ${item.resolution}</a>`;
+            });
+
+        } else if (url.includes('x.com') || url.includes('twitter.com')){
+            response = await fetch(twit);
+            data = await response.json();
+
+            if (data.type === 'image') {
+                data.media.forEach((imageUrl, index) => {
+                    downloadLinks += `<a href="${imageUrl}" class="bg-indigo-500 hover:bg-indigo-300 my-2 p-2 rounded text-white hover:text-black ease-in duration-200" download>Download Image ${index + 1}</a>`;
+                });
+            } else {
+                data.media.forEach((videoUrl, index) => {
+                    downloadLinks += `<a href="${videoUrl.url}" class="bg-indigo-500 hover:bg-indigo-300 my-2 p-2 rounded text-white hover:text-black ease-in duration-200" download>Download video quality ${videoUrl.quality}p</a>`;
+                });
+            }
+        } else {
+            response = await fetch(searchYt);
+            data = await response.json();
+
+            downloadLinks += `<p>Download video atau audio menggunakan judul atau title masih dalam tahap pengmbangan!</p>`
+        }
+        console.log('URL:', url);
+    console.log('Response:', response);
+    console.log('Data:', data);
+    console.log('Download Links:', downloadLinks);
+        document.getElementById('downloadLinks').innerHTML = downloadLinks;
+    } catch (error) {
+        if (error.message === 'Unsupported URL!, Hanya support fb/ig/tt/yt') {
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Unsupported URL!, Hanya support Tiktok/YouTube/Instagram/Twitter/Facebook"
+            });
+        } else {
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Terjadi Error, pastikan link yg ingin di download bukanlah private atau coba lagi nanti."
+            });
+        }
+        console.log(error.message);
+    } finally {
+        downloadButton.innerHTML = 'Search';
+    }
+}
