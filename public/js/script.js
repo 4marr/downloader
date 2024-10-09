@@ -1,8 +1,13 @@
 async function searchVideo() {
     const downloadButton = document.querySelector('button');
     downloadButton.innerHTML = `<svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+<<<<<<< HEAD
     <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
     <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+=======
+                          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+>>>>>>> 80ceaabadb75b070df5a646f4ee80b400b41809f
                         </svg>
                         Searching...`;
 
@@ -49,8 +54,13 @@ async function searchVideo() {
             data = await response.json();
             data.data.forEach((item, index) => {
                 downloadLinks += `
+<<<<<<< HEAD
                 <img src="${item.thumbnail}" alt="thumbnail" id="thumbnail" class="my-4" />
                 <a href="${item.url}" class="flex text-center my-2 items-center justify-center px-4 py-2 leading-6 text-sm shadow rounded-md text-white bg-indigo-500 hover:bg-indigo-400 transition ease-in-out duration-150" download>Download File ${index + 1}</a>`;
+=======
+                <img src="${item.thumbnail}" alt="thumbnail" id="thumbnail" />
+                <a href="${item.url}" class="flex text-center my-4 items-center justify-center px-4 py-2 leading-6 text-sm shadow rounded-md text-white bg-indigo-500 hover:bg-indigo-400 transition ease-in-out duration-150" download>Download File ${index + 1}</a>`;
+>>>>>>> 80ceaabadb75b070df5a646f4ee80b400b41809f
             });
         } else if (url.includes('tiktok.com')) {
             response = await fetch(tt);
@@ -59,6 +69,7 @@ async function searchVideo() {
             if (data.result.type === 'image') {
                 data.result.images.forEach((imageUrl, index) => {
                     downloadLinks += `
+<<<<<<< HEAD
                     <img src="${imageUrl}" alt="thumbnail" id="thumbnail" class="my-4" />
                     <a href="${imageUrl}" class="flex text-center my-2 items-center justify-center px-4 py-2 leading-6 text-sm shadow rounded-md text-white bg-indigo-500 hover:bg-indigo-400 transition ease-in-out duration-150" download="${randomString}.jpg">Download Image ${index + 1}</a>`;
                 });
@@ -70,6 +81,19 @@ async function searchVideo() {
                     <a href="${data.result.videoHD}" class="flex text-center my-2 items-center justify-center px-4 py-2 leading-6 text-sm shadow rounded-md text-white bg-indigo-500 hover:bg-indigo-400 transition ease-in-out duration-150" target="_blank" download>Download Video HD</a>
                     <a href="${data.result.videoWatermark}" class="flex text-center my-2 items-center justify-center px-4 py-2 leading-6 text-sm shadow rounded-md text-white bg-indigo-500 hover:bg-indigo-400 transition ease-in-out duration-150" target="_blank" download>Download Video With Watermark</a>
                     <a href="${data.result.music}" class="flex text-center my-2 items-center justify-center px-4 py-2 leading-6 text-sm shadow rounded-md text-white bg-indigo-500 hover:bg-indigo-400 transition ease-in-out duration-150" target="_blank" download>Download Music Audio</a>
+=======
+                    <img src="${imageUrl}" alt="thumbnail" id="thumbnail" />
+                    <a href="${imageUrl}" class="flex text-center my-4 items-center justify-center px-4 py-2 leading-6 text-sm shadow rounded-md text-white bg-indigo-500 hover:bg-indigo-400 transition ease-in-out duration-150" download="${randomString}.jpg">Download Image ${index + 1}</a>`;
+                });
+                downloadLinks += `<a href="${data.result.audio}" target="_blank" class="flex text-center my-4 items-center justify-center px-4 py-2 leading-6 text-sm shadow rounded-md text-white bg-indigo-500 hover:bg-indigo-400 transition ease-in-out duration-150" download>Download Music Audio</a>`;
+            } else {
+                downloadLinks += `
+                    <p>${data.result.desc}</p>
+                    <a href="${data.result.video}" class="flex text-center my-4 items-center justify-center px-4 py-2 leading-6 text-sm shadow rounded-md text-white bg-indigo-500 hover:bg-indigo-400 transition ease-in-out duration-150" target="_blank" download>Download Video</a>
+                    <a href="${data.result.videoHD}" class="flex text-center my-4 items-center justify-center px-4 py-2 leading-6 text-sm shadow rounded-md text-white bg-indigo-500 hover:bg-indigo-400 transition ease-in-out duration-150" target="_blank" download>Download Video HD</a>
+                    <a href="${data.result.videoWatermark}" class="flex text-center my-4 items-center justify-center px-4 py-2 leading-6 text-sm shadow rounded-md text-white bg-indigo-500 hover:bg-indigo-400 transition ease-in-out duration-150" target="_blank" download>Download Video With Watermark</a>
+                    <a href="${data.result.music}" class="flex text-center my-4 items-center justify-center px-4 py-2 leading-6 text-sm shadow rounded-md text-white bg-indigo-500 hover:bg-indigo-400 transition ease-in-out duration-150" target="_blank" download>Download Music Audio</a>
+>>>>>>> 80ceaabadb75b070df5a646f4ee80b400b41809f
                 `;
             }
         } else if (youtubeRegex.test(url)) {
@@ -79,8 +103,13 @@ async function searchVideo() {
             downloadLinks += `
             <img src="${data.result.thumbnail}" alt="thumbnail" id="thumbnail" class="my-4" />
             <p>${data.result.title}</p>
+<<<<<<< HEAD
             <a href="${data.result.urlVideo}" class="flex text-center my-2 items-center justify-center px-4 py-2 leading-6 text-sm shadow rounded-md text-white bg-indigo-500 hover:bg-indigo-400 transition ease-in-out duration-150" target="_blank" download="${data.title}">Download Video</a>
             <a href="${data.result.urlAudio}" class="flex text-center my-2 items-center justify-center px-4 py-2 leading-6 text-sm shadow rounded-md text-white bg-indigo-500 hover:bg-indigo-400 transition ease-in-out duration-150" target="_blank" download>Download Music Audio</a>
+=======
+            <a href="${data.result.urlVideo}" class="flex text-center my-4 items-center justify-center px-4 py-2 leading-6 text-sm shadow rounded-md text-white bg-indigo-500 hover:bg-indigo-400 transition ease-in-out duration-150" target="_blank" download="${data.title}">Download Video</a>
+            <a href="${data.result.urlAudio}" class="flex text-center my-4 items-center justify-center px-4 py-2 leading-6 text-sm shadow rounded-md text-white bg-indigo-500 hover:bg-indigo-400 transition ease-in-out duration-150" target="_blank" download>Download Music Audio</a>
+>>>>>>> 80ceaabadb75b070df5a646f4ee80b400b41809f
         `;
         } else if (/(reel|fb|facebook\.com|fb\.watch)/i.test(url)) {
             response = await fetch(fb);
@@ -88,7 +117,11 @@ async function searchVideo() {
 
             downloadLinks += `<img src="${data.data[0].thumbnail} alt="thumbnail" />`
             data.data.forEach((item) => {
+<<<<<<< HEAD
                 downloadLinks += `<a href="${item.url}" class="flex text-center my-2 items-center justify-center px-4 py-2 leading-6 text-sm shadow rounded-md text-white bg-indigo-500 hover:bg-indigo-400 transition ease-in-out duration-150" download>Download Video ${item.resolution}</a>`;
+=======
+                downloadLinks += `<a href="${item.url}" class="flex text-center my-4 items-center justify-center px-4 py-2 leading-6 text-sm shadow rounded-md text-white bg-indigo-500 hover:bg-indigo-400 transition ease-in-out duration-150" download>Download Video ${item.resolution}</a>`;
+>>>>>>> 80ceaabadb75b070df5a646f4ee80b400b41809f
             });
 
         } else if (url.includes('x.com') || url.includes('twitter.com')) {
@@ -97,11 +130,19 @@ async function searchVideo() {
 
             if (data.type === 'image') {
                 data.media.forEach((imageUrl, index) => {
+<<<<<<< HEAD
                     downloadLinks += `<a href="${imageUrl}" class="flex text-center my-2 items-center justify-center px-4 py-2 leading-6 text-sm shadow rounded-md text-white bg-indigo-500 hover:bg-indigo-400 transition ease-in-out duration-150" download>Download Image ${index + 1}</a>`;
                 });
             } else {
                 data.media.forEach((videoUrl, index) => {
                     downloadLinks += `<a href="${videoUrl.url}" class="flex text-center my-2 items-center justify-center px-4 py-2 leading-6 text-sm shadow rounded-md text-white bg-indigo-500 hover:bg-indigo-400 transition ease-in-out duration-150" download>Download video quality ${videoUrl.quality}p</a>`;
+=======
+                    downloadLinks += `<a href="${imageUrl}" class="flex text-center my-4 items-center justify-center px-4 py-2 leading-6 text-sm shadow rounded-md text-white bg-indigo-500 hover:bg-indigo-400 transition ease-in-out duration-150" download>Download Image ${index + 1}</a>`;
+                });
+            } else {
+                data.media.forEach((videoUrl, index) => {
+                    downloadLinks += `<a href="${videoUrl.url}" class="flex text-center my-4 items-center justify-center px-4 py-2 leading-6 text-sm shadow rounded-md text-white bg-indigo-500 hover:bg-indigo-400 transition ease-in-out duration-150" download>Download video quality ${videoUrl.quality}p</a>`;
+>>>>>>> 80ceaabadb75b070df5a646f4ee80b400b41809f
                 });
             }
         } else {
