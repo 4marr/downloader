@@ -1,0 +1,49 @@
+.logo-container {
+    overflow: hidden;
+    display: flex;
+}
+
+.logo {
+    display: flex;
+    flex-shrink: 0;
+    gap: 3rem;
+    padding: 1rem;
+    animation: infinite-scroll 10s linear infinite;
+}
+
+@keyframes infinite-scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+#header-drawer-button>#drawer-open {
+    display: block;
+}
+
+#header-drawer-button>#drawer-close {
+    display: none;
+}
+
+#header-drawer-button.open>#drawer-open {
+    display: none;
+}
+
+#header-drawer-button.open>#drawer-close {
+    display: block;
+}
+
+#drawer.open {
+    height: 100%;
+}
+
+#model.open {
+    bottom: 0;
+}
+
+#model.open {
+    bottom: 0;
+}

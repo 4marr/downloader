@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "name": "arch-downloader",
   "version": "1.0.0",
   "main": "tailwind.config.js",
@@ -11,5 +12,10 @@
   "description": "",
   "devDependencies": {
     "tailwindcss": "^3.4.13"
+=======
+  "dependencies": {
+    "@tailwindcss/cli": "^4.0.7",
+    "tailwindcss": "^4.0.7"
+>>>>>>> 0afbbff (change everything)
   }
 }

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARCH Downloader</title>
+    <meta name="description"
+        content="ARCH Downloader adalah downloader yang memungkinkan Anda untuk mengunduh video dan audio dari sosial media dengan mudah. Downloader ini memungkinkan Anda untuk mengunduh video dan audio dari sosial media dengan cepat dan mudah, tanpa harus mengunduh aplikasi atau menggunakan perangkat lunak tambahan. Downloader ini juga memungkinkan Anda untuk mengunduh video dan audio dalam berbagai format, seperti MP4, MP3, dan lainnya.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="../public/css/style.css">
+    <link rel="stylesheet" href="../public/css/custom.css">
+</head>
+
+<body class="">
+    <header id="header" class="fixed top-0 w-full h-16 z-50 bg-white">
+        <div class="full h-full mx-auto px-5">
+            <div class="relative flex justify-between items-center h-full w-full">
+                <div class="flex items-center gap-4 font-bold text-sm">
+                    <div class="buttons flex lg:hidden">
+                        <button id="header-drawer-button" aria-label="Toggle drawer open and closed"
+                            class="flex xl:hidden size-9 rounded-full p-2 items-center justify-center bg-transparent hover:bg-white/20 stroke-current hover:stroke-white ">
+                            <svg xmlns="http://www.w3.org/2000/svg" id="drawer-open" class="size-full stroke-current"
+                                width="20" height="20" viewBox="0 0 24 24">
+                                <path fill="currentColor"
+                                    d="M4 18q-.425 0-.712-.288T3 17t.288-.712T4 16h16q.425 0 .713.288T21 17t-.288.713T20 18zm0-5q-.425 0-.712-.288T3 12t.288-.712T4 11h16q.425 0 .713.288T21 12t-.288.713T20 13zm0-5q-.425 0-.712-.288T3 7t.288-.712T4 6h16q.425 0 .713.288T21 7t-.288.713T20 8z"
+                                    stroke-width="0.5" stroke="currentColor" />
+                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" id="drawer-close" class="size-full stroke-current"
+                                width="20" height="20" viewBox="0 0 24 24">
+                                <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M6.758 17.243L12.001 12m5.243-5.243L12 12m0 0L6.758 6.757M12.001 12l5.243 5.243" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div>
+                        <h2
+                            class="flex items-center text-l-on-base dark:text-d-on-base transition-colors duration-300 ease-in-out text-xl">
+                            <h2>ARCH Downloader</h2>
+                            <p class="text-xs font-normal">yt</p>
+                        </h2>
+                    </div>
+                </div>
+                <div class="">
+                    <nav
+                        class="flex items-center justify-center text-sm gap-4 font-semibold text-l-on-base dark:text-d-on-base">
+                        <a href="/downloader/youtube"
+                            class="hidden lg:flex h-8 rounded-full px-3 text-current items-center justify-center  nav-link-drawer">YouTube
+                        </a>
+                        <a href="/downloader/spotify"
+                            class="hidden lg:flex h-8 rounded-full px-3 text-current items-center justify-center  nav-link-drawer">Spotify
+                        </a>
+                        <a href="/downloader/tidal"
+                            class="hidden lg:flex h-8 rounded-full px-3 text-current items-center justify-center  nav-link-drawer">Tidal
+                        </a>
+                        <button id="drawer-theme-button" aria-label="Toggle light and dark theme"
+                            class="flex items-center justify-center bg-transparent stroke-current dark:stroke-d-on-base transition-colors duration-300 ease-in-out cursor-pointer">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                class="block dark:hidden cursor-pointer">
+                                <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="M12 3h.393a7.5 7.5 0 0 0 7.92 12.446A9 9 0 1 1 12 2.992z" />
+                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                class="hidden dark:block cursor-pointer">
+                                <g fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="6" />
+                                    <path stroke-linecap="round"
+                                        d="M12 2v1m0 18v1m10-10h-1M3 12H2m17.07-7.07l-.392.393M5.322 18.678l-.393.393m14.141-.001l-.392-.393M5.322 5.322l-.393-.393" />
+                                </g>
+                            </svg>
+                        </button>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div id="drawer"
+        class="fixed inset-0 h-0 z-40 overflow-hidden flex flex-col items-center justify-center bg-white/80 dark:bg-slate-700/80 transition-[height] duration-300 ease-in-out backdrop-blur-lg">
+        <nav class="flex flex-col items-center space-y-2 text-dark font-semibold gap-4">
+            <a href="/downloader/youtube"
+                class="h-8 rounded-full px-3 text-current flex items-center justify-center  nav-link-drawer">YouTube
+            </a>
+            <a href="/downloader/spotify"
+                class="h-8 rounded-full px-3 text-current flex items-center justify-center  nav-link-drawer">Spotify
+            </a>
+            <a href="/downloader/tidal"
+                class="h-8 rounded-full px-3 text-current flex items-center justify-center  nav-link-drawer">Tidal
+            </a>
+        </nav>
+    </div>
+    <main class="flex items-center justify-center h-full w-full px-4 min-h-screen overflow-hidden mt-20">
+        <div class="max-w-screen-xl w-full">
+            <section class="flex w-full mt-4 justify-center">
+                <div class="w-screen px-4">
+                    <p class="text-center my-4">Enter the post url or title from YouTube to download videos, or
+                        music</p>
+                    <input type="text" name="" id="urlSosmed" placeholder="Never Gonna Give You Up"
+                        class="w-full p-2 rounded-md border-2 border-violet-700 hover:border-violet-400 outline-none transition-all duration-300">
+                    <div class="my-4 flex gap-4">
+                        <div>
+                            <label for="format">Format</label>
+                            <select name="format" id="format" onchange="updateQualityOptions()">
+                                <option value="mp4">mp4</option>
+                                <option value="mp3">mp3</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="quality">Quality</label>
+                            <select name="quality" id="quality">
+                            </select>
+                        </div>
+                        <div>
+                            <label for="server">Server</label>
+                            <select name="server" id="server">
+                                <option value="auto" selected>auto</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                            </select>
+                        </div>
+                    </div>
+                    <script>
+                        function updateQualityOptions() {
+                            const formatSelect = document.getElementById('format');
+                            const qualitySelect = document.getElementById('quality');
+                            const selectedFormat = formatSelect.value;
+
+                            // Clear existing options
+                            qualitySelect.innerHTML = '';
+
+                            // Define quality options based on format
+                            const qualityOptions = selectedFormat === 'mp4'
+                                ? ['144', '240', '360', '480', '720', '1080']
+                                : ['64', '128', '192', '256', '320'];
+
+                            // Add new options to the quality select element
+                            qualityOptions.forEach(quality => {
+                                const option = document.createElement('option');
+                                option.value = quality;
+                                option.textContent = quality;
+                                if ((selectedFormat === 'mp4' && quality === '720') || (selectedFormat === 'mp3' && quality === '320')) {
+                                    option.selected = true;
+                                }
+                                qualitySelect.appendChild(option);
+                            });
+                        }
+
+                        // Initialize quality options on page load
+                        document.addEventListener('DOMContentLoaded', updateQualityOptions);
+                    </script>
+                    <div class="my-4 flex justify-end">
+                        <button id="searchBuuton" type="button"
+                            class="inline-flex items-center px-7 py-2 leading-6 text-sm shadow-default rounded-md text-white bg-violet-700 hover:bg-violet-400 transition ease-in-out duration-150"
+                            onclick="searchVideo()">
+                            Search
+                        </button>
+                    </div>
+                </div>
+
+            </section>
+            <section class="px-4 mb-10">
+                <div class="flex flex-col justify-center text-center" id="downloadLinks"></div>
+            </section>
+        </div>
+    </main>
+    <div class="text-center bottom-0 w-full px-5 py-2 mb-7">
+        <p class="text-xs text-d-base/75 dark:text-l-base/75">Produdly Created by
+            <a href="https://ammaricano.my.id" class="underline">ammaricano</a>
+            and Powered by
+            <a href="https://fastrestapis.fasturl.cloud/" class="underline">FastRestApis</a>
+        </p>
+    </div>
+    <script src="./js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
+
+</html>
