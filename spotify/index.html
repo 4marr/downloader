@@ -43,7 +43,7 @@
                         <h2
                             class="flex items-center text-l-on-base dark:text-d-on-base transition-colors duration-300 ease-in-out text-xl">
                             <h2>ARCH Downloader</h2>
-                            <p class="text-xs font-normal">YouTube</p>
+                            <p class="text-xs font-normal">Spotify</p>
                         </h2>
                     </div>
                 </div>
@@ -97,95 +97,23 @@
     <main class="flex items-center justify-center h-full w-full px-4 overflow-hidden mt-20">
         <div class="max-w-screen-xl w-full">
             <section class="flex w-full mt-4 justify-center">
-                <div class="w-full px-4">
-                    <div class="w-full flex justify-center items-center">
-                        <div class="flex justify-center items-center gap-4 p-1 rounded-full bg-gray-200">
-                            <button id="download" class="bg-violet-700 text-white rounded-full py-2 px-3 cursor-pointer">Download Video</button>
-                            <button id="transcript" class="rounded-full py-2 px-3 cursor-pointer">Transcript Video</button>
-                        </div>
-                    </div>
-                    <div id="sectionDownload">
-                        <p class="text-center my-4">Enter the video url or title from YouTube to download videos, or
-                            music</p>
-                        <input type="text" name="" id="urlYtDownload" placeholder="Never Gonna Give You Up"
-                            class="w-full p-2 rounded-md border-2 border-violet-700 hover:border-violet-400 outline-none transition-all duration-300">
-                        <div class="my-4 flex gap-4">
-                            <div>
-                                <label for="format">Format</label>
-                                <select name="format" id="format" onchange="updateQualityOptions()">
-                                    <option value="mp4">mp4</option>
-                                    <option value="mp3">mp3</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label for="quality">Quality</label>
-                                <select name="quality" id="quality">
-                                </select>
-                            </div>
-                            <div>
-                                <label for="server">Server</label>
-                                <select name="server" id="server">
-                                    <option value="auto" selected>auto</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                </select>
-                            </div>
-                        </div>
-                        <script>
-                            function updateQualityOptions() {
-                                const formatSelect = document.getElementById('format');
-                                const qualitySelect = document.getElementById('quality');
-                                const selectedFormat = formatSelect.value;
-
-                                // Clear existing options
-                                qualitySelect.innerHTML = '';
-
-                                // Define quality options based on format
-                                const qualityOptions = selectedFormat === 'mp4'
-                                    ? ['144', '240', '360', '480', '720', '1080']
-                                    : ['64', '128', '192', '256', '320'];
-
-                                // Add new options to the quality select element
-                                qualityOptions.forEach(quality => {
-                                    const option = document.createElement('option');
-                                    option.value = quality;
-                                    option.textContent = quality;
-                                    if ((selectedFormat === 'mp4' && quality === '720') || (selectedFormat === 'mp3' && quality === '320')) {
-                                        option.selected = true;
-                                    }
-                                    qualitySelect.appendChild(option);
-                                });
-                            }
-
-                            // Initialize quality options on page load
-                            document.addEventListener('DOMContentLoaded', updateQualityOptions);
-                        </script>
-                        <div class="my-4 flex justify-end">
-                            <button id="searchButton" type="button"
-                                class="inline-flex items-center px-7 py-2 leading-6 text-sm shadow-default rounded-md text-white bg-violet-700 hover:bg-violet-400 transition ease-in-out duration-150"
-                                onclick="searchVideo()">
-                                Search
-                            </button>
-                        </div>
-                    </div>
-                    <div id="sectionTranscript" class="hidden">
-                        <p class="text-center my-4">Enter the video url or title from YouTube to transcript videos</p>
-                        <input type="text" name="" id="urlYtTranscript" placeholder="https://www.youtube.com/"
-                            class="w-full p-2 rounded-md border-2 border-violet-700 hover:border-violet-400 outline-none transition-all duration-300">
-                        <div class="my-4 flex justify-end">
-                            <button id="transcriptButton" type="button"
-                                class="inline-flex items-center px-7 py-2 leading-6 text-sm shadow-default rounded-md text-white bg-violet-700 hover:bg-violet-400 transition ease-in-out duration-150"
-                                onclick="transcriptVideo()">
-                                Transcript
-                            </button>
-                        </div>
+                <div class="w-screen px-4">
+                    <p class="text-center my-4">Enter the post url or title from Spotify to download videos, or
+                        music</p>
+                    <input type="text" name="" id="urlSosmed" placeholder="Never Gonna Give You Up"
+                        class="w-full p-2 rounded-md border-2 border-green-700 hover:border-green-400 outline-none transition-all duration-300">
+                    <div class="my-4 flex justify-end">
+                        <button id="searchBuuton" type="button"
+                            class="inline-flex items-center px-7 py-2 leading-6 text-sm shadow-default rounded-md text-white bg-green-700 hover:bg-green-400 transition ease-in-out duration-150"
+                            onclick="searchVideo()">
+                            Search
+                        </button>
                     </div>
                 </div>
 
             </section>
             <section class="px-4 mb-10">
                 <div class="flex flex-col justify-center text-center" id="downloadLinks"></div>
-                <div class="flex flex-col justify-center text-center" id="transcriptResult"></div>
             </section>
         </div>
     </main>

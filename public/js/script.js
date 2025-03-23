@@ -22,7 +22,7 @@ async function searchVideo() {
         }
 
         const randomString = generateRandomString(8);
-        const url = document.getElementById('urlSosmed').value;
+        const url = document.getElementById('urlYtDownload').value;
         if (url.trim() === '') {
             Swal.fire({
                 icon: "error",
