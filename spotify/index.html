@@ -50,6 +50,9 @@
                 <div class="">
                     <nav
                         class="flex items-center justify-center text-sm gap-4 font-semibold text-l-on-base dark:text-d-on-base">
+                        <a href="/downloader"
+                            class="hidden lg:flex h-8 rounded-full px-3 text-current items-center justify-center  nav-link-drawer">Home
+                        </a>
                         <a href="/downloader/youtube"
                             class="hidden lg:flex h-8 rounded-full px-3 text-current items-center justify-center  nav-link-drawer">YouTube
                         </a>
@@ -59,22 +62,6 @@
                         <a href="/downloader/tidal"
                             class="hidden lg:flex h-8 rounded-full px-3 text-current items-center justify-center  nav-link-drawer">Tidal
                         </a>
-                        <button id="drawer-theme-button" aria-label="Toggle light and dark theme"
-                            class="flex items-center justify-center bg-transparent stroke-current dark:stroke-d-on-base transition-colors duration-300 ease-in-out cursor-pointer">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                class="block dark:hidden cursor-pointer">
-                                <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2" d="M12 3h.393a7.5 7.5 0 0 0 7.92 12.446A9 9 0 1 1 12 2.992z" />
-                            </svg>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                class="hidden dark:block cursor-pointer">
-                                <g fill="none" stroke="currentColor" stroke-width="2">
-                                    <circle cx="12" cy="12" r="6" />
-                                    <path stroke-linecap="round"
-                                        d="M12 2v1m0 18v1m10-10h-1M3 12H2m17.07-7.07l-.392.393M5.322 18.678l-.393.393m14.141-.001l-.392-.393M5.322 5.322l-.393-.393" />
-                                </g>
-                            </svg>
-                        </button>
                     </nav>
                 </div>
             </div>
@@ -83,6 +70,9 @@
     <div id="drawer"
         class="fixed inset-0 h-0 z-40 overflow-hidden flex flex-col items-center justify-center bg-white/80 dark:bg-slate-700/80 transition-[height] duration-300 ease-in-out backdrop-blur-lg">
         <nav class="flex flex-col items-center space-y-2 text-dark font-semibold gap-4">
+            <a href="/downloader"
+                class="h-8 rounded-full px-3 text-current flex items-center justify-center  nav-link-drawer">Home
+            </a>
             <a href="/downloader/youtube"
                 class="h-8 rounded-full px-3 text-current flex items-center justify-center  nav-link-drawer">YouTube
             </a>
@@ -103,7 +93,7 @@
                     <input type="text" name="" id="urlSosmed" placeholder="Never Gonna Give You Up"
                         class="w-full p-2 rounded-md border-2 border-green-700 hover:border-green-400 outline-none transition-all duration-300">
                     <div class="my-4 flex justify-end">
-                        <button id="searchBuuton" type="button"
+                        <button id="searchButton" type="button"
                             class="inline-flex items-center px-7 py-2 leading-6 text-sm shadow-default rounded-md text-white bg-green-700 hover:bg-green-400 transition ease-in-out duration-150"
                             onclick="searchVideo()">
                             Search
@@ -113,7 +103,8 @@
 
             </section>
             <section class="px-4 mb-10">
-                <div class="flex flex-col justify-center text-center" id="downloadLinks"></div>
+                <div class="flex flex-col justify-center gap-2 text-center" id="downloadLinks">
+                </div>
             </section>
         </div>
     </main>
