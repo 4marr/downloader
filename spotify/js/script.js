@@ -89,7 +89,7 @@ async function searchVideo() {
             response = await fetch(spotifySearch);
             data = await response.json();
             data.forEach((item) => {
-                downloadLinks += `<div class="text-start grid grid-cols-1 md:grid-cols-4 gap-4 p-4 bg-[#f0f0f5] rounded-lg card">
+                downloadLinks += `<div id="${item.id}" class="text-start grid grid-cols-1 md:grid-cols-4 gap-4 p-4 bg-[#f0f0f5] rounded-lg card">
                 <div class="flex gap-2 md:col-span-2">
                     <div>
                         <img src="${item.thumbnail}" alt="" class="w-12 h-12 object-cover rounded-lg">
@@ -117,49 +117,48 @@ async function searchVideo() {
         document.querySelectorAll('.fetch-button').forEach(button => {
             button.addEventListener('click', async function () {
                 this.innerHTML = `
-    <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg"
-                            fill="none" viewBox="0 0 24 24">
-                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"
-                                stroke-width="4"></circle>
-                            <path class="opacity-75" fill="currentColor"
-                                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
-                            </path>
-                        </svg>
-                        Fetching...`;
-                const fetchUrl = `https://fastrestapis.fasturl.cloud/downup/spotifydown?url=https://open.spotify.com/track/${encodeURIComponent(this.dataset.id)}`;
-                try {
-                    const fetchResponse = await fetch(fetchUrl);
-                    const fetchData = await fetchResponse.json();
+                <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg"
+                                        fill="none" viewBox="0 0 24 24">
+                                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"
+                                            stroke-width="4"></circle>
+                                        <path class="opacity-75" fill="currentColor"
+                                            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+                                        </path>
+                                    </svg>
+                                    Fetching...`;
+                const id = this.getAttribute('data-id');
+                const targetDiv = this.getAttribute('data-target');
+                await fetchAndDisplay(id, targetDiv);
+            });
+        });
+
+        async function fetchAndDisplay(id, targetDiv) {
+            try {
+                const fetchData = `https://fastrestapis.fasturl.cloud/downup/spotifydown?url=https://open.spotify.com/track/${encodeURIComponent(id)}`;
+                let response = await fetch(fetchData);
+                let data = await response.json();
+                console.log(data);
+
                     const fetchResult = `
                         <div class="w-full bg-white rounded-lg shadow-lg p-6 card">
                             <div class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-6">
                                 <!-- Album Cover -->
-                                <img src="${fetchData.result.metadata.cover}" alt="Album Cover" class="w-full md:w-48 h-full object-cover rounded-lg shadow-md">
+                                <img src="${data.result.metadata.cover}" alt="Album Cover" class="w-full md:w-48 h-full object-cover rounded-lg shadow-md">
 
                                 <!-- Track Details -->
                                 <div class="flex flex-col">
-                                    <h1 class="text-4xl font-bold text-black mb-2">${fetchData.result.metadata.title}</h1>
+                                    <h1 class="text-lg text-center font-bold text-black mb-2">${data.result.metadata.title}</h1>
                                     <!-- Artist Names -->
-                                    <div class="text-lg text-black mb-4">
-                                        ${fetchData.result.metadata.artists} - ${fetchData.result.metadata.album}
-                                    </div>
-
-                                    <!-- Metadata -->
-                                    <div class="text-sm text-start text-gray-800 mb-2">
-                                        <p><strong>Release:</strong> ${fetchData.result.metadata.releaseDate}</p>
+                                    <div class="text-center text-black mb-4">
+                                        ${data.result.metadata.artists}
                                     </div>
 
                                     <!-- Download Button -->
-                                    <a href="${fetchData.result.link}" class="text-green-700 bg-[#F0F0F5] rounded-full py-2 px-3 text-lg">Download</a>
+                                    <a href="${data.result.link}" class="text-green-700 text-center bg-[#F0F0F5] rounded-full py-2 px-4">Download</a>
                                 </div>
                             </div>
                         </div>`;
-                    this.closest('.card').innerHTML += fetchResult;
-
-                    // Add event listener to hide the absolute div when clicked
-                    document.getElementById('fetchResult').addEventListener('click', function () {
-                        this.style.display = 'none';
-                    });
+                        document.getElementById(targetDiv).innerHTML += fetchResult;
                 } catch (error) {
                     console.log(error.message);
                     Swal.fire({
@@ -168,10 +167,9 @@ async function searchVideo() {
                         text: "Terjadi Error, pastikan link yg ingin di download bukanlah private atau coba lagi nanti."
                     });
                 } finally {
-                    this.innerHTML = 'Fetch';
+                    document.getElementById(targetDiv).querySelector('.fetch-button').innerHTML = 'Fetch';
                 }
-            });
-        });
+            }
     } catch (error) {
         Swal.fire({
             icon: "error",

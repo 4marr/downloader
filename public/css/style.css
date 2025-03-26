@@ -201,9 +201,6 @@
   }
 }
 @layer utilities {
-  .absolute {
-    position: absolute;
-  }
   .fixed {
     position: fixed;
   }
@@ -587,9 +584,6 @@
   }
   .text-\[0\.6rem\] {
     font-size: 0.6rem;
-  }
-  .text-\[6px\] {
-    font-size: 6px;
   }
   .leading-6 {
     --tw-leading: calc(var(--spacing) * 6);

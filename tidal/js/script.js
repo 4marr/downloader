@@ -211,7 +211,7 @@ async function searchTitle() {
             </div>
         </div>`;
 
-                document.getElementById(targetDiv).innerHTML += downloadLinks;
+                document.getElementById(targetDiv).innerHTML = downloadLinks;
             } catch (error) {
                 handleFetchError(error);
             } finally {
