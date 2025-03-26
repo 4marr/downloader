@@ -10,7 +10,7 @@ async function searchVideo() {
                             </path>
                         </svg>
                         Searching...`;
-                        document.getElementById('downloadLinks').innerHTML = "";
+    document.getElementById('downloadLinks').innerHTML = "";
 
     try {
         const url = document.getElementById('urlSosmed').value;
@@ -75,7 +75,7 @@ async function searchVideo() {
                     <p>${item.duration}</p>
                 </div>
                 <div class="flex justify-end">
-                    <button class="inline-flex items-center px-7 py-2 leading-6 text-sm shadow-default rounded-md text-white bg-green-700 hover:bg-green-400 transition ease-in-out duration-150 fetch-button" data-id="${item.id}">Fetch</button>
+                    <button class="inline-flex items-center px-7 py-2 leading-6 text-sm shadow-default rounded-md text-white bg-green-700 hover:bg-green-400 transition ease-in-out duration-150 fetch-button" data-id="${item.id}" data-target="${item.id}">Fetch</button>
                 </div>
             </div>`
             });
@@ -103,7 +103,7 @@ async function searchVideo() {
                     <p>${item.duration}</p>
                 </div>
                 <div class="flex justify-end">
-                    <button class="inline-flex items-center px-7 py-2 leading-6 text-sm shadow-default rounded-md text-white bg-green-700 hover:bg-green-400 transition ease-in-out duration-150 fetch-button" data-id="${item.id}">Fetch</button>
+                    <button class="inline-flex items-center px-7 py-2 leading-6 text-sm shadow-default rounded text-white bg-green-700 hover:bg-green-400 transition ease-in-out duration-150 fetch-button" data-id="${item.id}" data-target="${item.id}">Fetch</button>
                 </div>
             </div>`;
             });
@@ -126,12 +126,11 @@ async function searchVideo() {
                             </path>
                         </svg>
                         Fetching...`;
-                const fetchUrl = `https://spotifyapi.caliphdev.com/api/info/track?url=https://open.spotify.com/track/${encodeURIComponent(this.dataset.id)}`;
+                const fetchUrl = `https://fastrestapis.fasturl.cloud/downup/spotifydown?url=https://open.spotify.com/track/${encodeURIComponent(this.dataset.id)}`;
                 try {
                     const fetchResponse = await fetch(fetchUrl);
                     const fetchData = await fetchResponse.json();
                     const fetchResult = `
-                    <div class="fixed top-0 left-0 w-full h-full bg-gray-800/20 rounded-lg shadow-lg p-14 card z-50" id="fetchResult">
                         <div class="w-full bg-white rounded-lg shadow-lg p-6 card">
                             <div class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-6">
                                 <!-- Album Cover -->
@@ -154,9 +153,8 @@ async function searchVideo() {
                                     <a href="${fetchData.result.link}" class="text-green-700 bg-[#F0F0F5] rounded-full py-2 px-3 text-lg">Download</a>
                                 </div>
                             </div>
-                        </div>
-                    </div>`;
-                    document.getElementById('downloadLinks').innerHTML += fetchResult;
+                        </div>`;
+                    this.closest('.card').innerHTML += fetchResult;
 
                     // Add event listener to hide the absolute div when clicked
                     document.getElementById('fetchResult').addEventListener('click', function () {
@@ -175,11 +173,11 @@ async function searchVideo() {
             });
         });
     } catch (error) {
-            Swal.fire({
-                icon: "error",
-                title: "Oops...",
-                text: "Terjadi Error, pastikan link yg ingin di download bukanlah private atau coba lagi nanti."
-            });
+        Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Terjadi Error, pastikan link yg ingin di download bukanlah private atau coba lagi nanti."
+        });
         console.log(error.message);
     } finally {
         downloadButton.innerHTML = 'Search';
